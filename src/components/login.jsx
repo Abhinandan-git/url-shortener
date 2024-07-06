@@ -3,16 +3,22 @@ import { Button } from "./ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { Input } from "./ui/input"
 import Error from "./error"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import * as Yup from 'yup'
+import useFetch from "@/hooks/use-fetch"
+import { login } from "@/db/apiAuth"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 const Login = () => {
 	const [errors, setErrors] = useState([]);
-
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	});
+
+	const navigate = useNavigate();
+	let [searchParams] = useSearchParams();
+	const longLink = searchParams.get("createNew");
 
 	const handleInputChange = (event) => {
 		const {name, value} = event.target;
@@ -22,6 +28,16 @@ const Login = () => {
 		}));
 	}
 
+	const {data, error, loading, func: funcLogin} = useFetch(login, formData);
+
+	useEffect(() => {
+		if (error === null && data) {
+			navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`)
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data, error])
+	
+	
 	const handleLogin = async () => {
 		setErrors([]);
 		try {
@@ -35,6 +51,8 @@ const Login = () => {
 			});
 
 			await schema.validate(formData, {abortEarly: false});
+
+			await funcLogin();
 		} catch (error) {
 			const newErrors = {};
 
@@ -52,7 +70,7 @@ const Login = () => {
 				<CardHeader>
 					<CardTitle>Login</CardTitle>
 					<CardDescription>to your account if you have one.</CardDescription>
-					<Error message={"Invalid password"} />
+					{error && <Error message={error.message} />}
 				</CardHeader>
 
 				<CardContent className="space-y-2">
@@ -82,7 +100,7 @@ const Login = () => {
 				{/* Button */}
 				<CardFooter>
 					<Button onClick={handleLogin}>
-						{true ? <BeatLoader size={10} color="#2f4550" /> : "Login"}
+						{loading ? <BeatLoader size={10} color="#2f4550" /> : "Login"}
 					</Button>
 				</CardFooter>
 			</Card>
