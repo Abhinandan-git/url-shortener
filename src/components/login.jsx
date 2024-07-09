@@ -34,7 +34,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (error === null && data) {
-			navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`)
+			navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
 			fetchUser();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -72,7 +72,9 @@ const Login = () => {
 			<Card>
 				<CardHeader>
 					<CardTitle>Login</CardTitle>
-					<CardDescription>to your account if you have one.</CardDescription>
+					<CardDescription>
+						Login to your account if you have one.
+					</CardDescription>
 					{error && <Error message={error.message} />}
 				</CardHeader>
 
