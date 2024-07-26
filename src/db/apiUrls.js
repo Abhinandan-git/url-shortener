@@ -9,3 +9,13 @@ export async function getUrls(user_id) {
 
 	return session;
 }
+
+export async function deleteUrl(id) {
+	const { data: session, error } = await supabase.from("urls").delete().eq("id", id);
+
+	if (error) {
+		throw new Error("Unable to load URLs");
+	}
+
+	return session;
+}
