@@ -3,10 +3,11 @@
 import { Link } from "react-router-dom"
 import { Copy, Download, LinkIcon, Trash } from "lucide-react"
 import { Button } from "./ui/button"
+import useFetch from "@/hooks/use-fetch";
 import { deleteUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 
-const LinkCard = ({ url, fetchUrls }) => {
+const LinkCard = ({ url = [], fetchUrls }) => {
 	const downloadImage = () => {
 		const imageUrl = url?.qr;
 		const fileName = url?.title;
@@ -20,7 +21,7 @@ const LinkCard = ({ url, fetchUrls }) => {
 		document.body.removeChild(anchor);
 	};
 
-	const {loading: loadingDelete, func: funcDelete} = fetchUrls(deleteUrl, url?.id);
+	const {loading: loadingDelete, func: funcDelete} = useFetch(deleteUrl, url?.id);
 	
 	return (
 		<div className="flex flex-col md:flex-row gap-5 border p-4 bg-gray-900 rounded-lg">
@@ -35,7 +36,7 @@ const LinkCard = ({ url, fetchUrls }) => {
           {url?.title}
         </span>
         <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-          https://shortn.in/{url?.custom_url ? url?.custom_url : url?.short_url}
+          https://shortn.in/{url?.custom_url ? url?.custom_url : url.short_url}
         </span>
 				<span className="flex items-center gap-1 hover:underline cursor-pointer">
           <LinkIcon className="p-1" />

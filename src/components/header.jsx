@@ -33,7 +33,7 @@ const Header = () => {
 									{/* Avatar Icon */}
 									<Avatar>
 										<AvatarImage src={user?.user_metadata?.profile_pic} className="object-contain" />
-										<AvatarFallback>AJ</AvatarFallback>
+										<AvatarFallback>G</AvatarFallback>
 									</Avatar>
 								</DropdownMenuTrigger>
 								
