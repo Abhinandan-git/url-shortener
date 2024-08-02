@@ -62,11 +62,11 @@ const LinkPage = () => {
             {url?.title}
           </span>
           <a
-            href={`https://shortn.infinityfreeapp.com/${link}`}
+            href={`http://localhost:5173/${link}`}
             target="_blank"
             className="text-3xl sm:text-4xl text-blue-400 font-bold hover:underline cursor-pointer"
           >
-            https://shortn.infinityfreeapp.com/{link}
+            http://localhost:5173/{link}
           </a>
           <a
             href={url?.original_url}
@@ -83,7 +83,7 @@ const LinkPage = () => {
             <Button
               variant="ghost"
               onClick={() =>
-                navigator.clipboard.writeText(`https://shortn.infinityfreeapp.com/${link}`)
+                navigator.clipboard.writeText(`http://localhost:5173/${link}`)
               }
             >
               <Copy />
