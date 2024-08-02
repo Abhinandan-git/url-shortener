@@ -41,7 +41,7 @@ const LandingPage = () => {
 			<Accordion type="single" collapsible className="mt-11 w-full md:px-11">
         <AccordionItem value="item-1">
           <AccordionTrigger>
-            How does the Trimrr URL shortener works?
+            How does the Shortn URL shortener works?
           </AccordionTrigger>
           <AccordionContent>
             When you enter a long URL, our system generates a shorter version of that URL. This shortened URL redirects to the original long URL when accessed.

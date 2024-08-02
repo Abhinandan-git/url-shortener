@@ -39,7 +39,7 @@ const Header = () => {
 								
 								{/* Dropdown Menu Content */}
 								<DropdownMenuContent>
-									<DropdownMenuLabel>{user?.user_metadata?.name}</DropdownMenuLabel>
+									<DropdownMenuLabel>{user?.user_metadata?.name || "Guest"}</DropdownMenuLabel>
 									<DropdownMenuSeparator />
 									<DropdownMenuItem>
 										<Link to="/dashboard" className="flex">
