@@ -8,6 +8,8 @@ import { deleteUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
 
 const LinkCard = ({ url = [], fetchUrls }) => {
+	const location = window.location;
+
 	const downloadImage = () => {
 		const imageUrl = url?.qr;
 		const fileName = url?.title;
@@ -36,7 +38,7 @@ const LinkCard = ({ url = [], fetchUrls }) => {
           {url?.title}
         </span>
         <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-          https://shortn.in/{url?.custom_url ? url?.custom_url : url.short_url}
+					{location.protocol + "//" + location.hostname + (location.port ? `:${location.port}` : "") + "/" + (url?.custom_url ? url?.custom_url : url.short_url)}
         </span>
 				<span className="flex items-center gap-1 hover:underline cursor-pointer">
           <LinkIcon className="p-1" />
@@ -51,7 +53,7 @@ const LinkCard = ({ url = [], fetchUrls }) => {
 				<Button
 					variant="ghost"
 					onClick={() => {
-						navigator.clipboard.writeText(`https://shortn.in/${url?.short_url}`);
+						navigator.clipboard.writeText(`${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ""}/${url?.short_url}`)
 					}}>
 					<Copy />
 				</Button>
