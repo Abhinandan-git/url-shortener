@@ -13,7 +13,7 @@ const AppLayout = () => {
 			</main>
 
 			{/* Footer */}
-			<div className="p-10 text-center bg-gray-800 mt-10">
+			<div className="p-5 text-center bg-gray-800 mt-10">
 				Made by Abhinandan Jain
 			</div>
 		</div>
